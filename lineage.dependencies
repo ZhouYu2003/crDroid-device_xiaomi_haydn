@@ -12,14 +12,14 @@
    "remote"     : "pixel-devices-blobs"
  },
  {
-   "repository" : "kernel_xiaomi_haydn",
+   "repository" : "ZhouYu2003/crDroid-kernel_xiaomi_haydn",
    "target_path": "kernel/xiaomi/haydn",
    "branch"     : "twelve"
  },
  {
-   "repository" : "PixelExperience/hardware_xiaomi",
+   "repository" : "crdroidandroid/android_hardware_xiaomi",
    "target_path": "hardware/xiaomi",
-   "branch"     : "twelve"
+   "branch"     : "12.0"
  },
  {
    "repository" : "jjpprrrr/prelude-clang",
