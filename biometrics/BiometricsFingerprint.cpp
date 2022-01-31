@@ -18,7 +18,9 @@
 
 #include <hardware/hw_auth_token.h>
 
-#include "xiaomi_fingerprint.h"
+#include <hardware/hardware.h>
+#include <hardware/fingerprint.h>
+
 #include "BiometricsFingerprint.h"
 
 #include <inttypes.h>
@@ -210,14 +212,7 @@ IBiometricsFingerprint* BiometricsFingerprint::getInstance() {
     return sInstance;
 }
 
-IXiaomiFingerprint* BiometricsFingerprint::getXiaomiInstance() {
-    if (!sInstance) {
-      sInstance = new BiometricsFingerprint();
-    }
-    return sInstance;
-}
-
-xiaomi_fingerprint_device_t* BiometricsFingerprint::openHal() {
+fingerprint_device_t* BiometricsFingerprint::openHal() {
     int err;
     const hw_module_t *hw_mdl = nullptr;
     ALOGD("Opening fingerprint hal library...");
@@ -251,8 +246,8 @@ xiaomi_fingerprint_device_t* BiometricsFingerprint::openHal() {
         return nullptr;
     }
 
-    xiaomi_fingerprint_device_t* fp_device =
-        reinterpret_cast<xiaomi_fingerprint_device_t*>(device);
+    fingerprint_device_t* fp_device =
+        reinterpret_cast<fingerprint_device_t*>(device);
 
     if (0 != (err =
             fp_device->set_notify(fp_device, BiometricsFingerprint::notify))) {
@@ -358,10 +353,6 @@ void BiometricsFingerprint::notify(const fingerprint_msg_t *msg) {
 
 Return<bool> BiometricsFingerprint::isUdfps(uint32_t /*sensorId*/) {
     return false;
-}
-
-Return<int32_t> BiometricsFingerprint::extCmd(int32_t cmd, int32_t param) {
-    return mDevice->extCmd(mDevice, cmd, param);
 }
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t /*x*/, uint32_t /*y*/,
