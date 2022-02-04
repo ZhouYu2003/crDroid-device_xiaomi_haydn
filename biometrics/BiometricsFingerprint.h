@@ -73,6 +73,10 @@ public:
     // Methods from ::vendor::xiaomi::hardware::fingerprintextension::V1_0::IXiaomiFingerprint follow.
     Return<int32_t> extCmd(int32_t cmd, int32_t param) override;
 
+    // Add blank callbacks for udfps.
+    Return<void> onShowUdfpsOverlay() override;
+    Return<void> onHideUdfpsOverlay() override;
+
 private:
     static xiaomi_fingerprint_device_t* openHal();
     static void notify(const fingerprint_msg_t *msg); /* Static callback for legacy HAL implementation */
